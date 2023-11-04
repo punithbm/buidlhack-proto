@@ -19,11 +19,7 @@
     height: 100%;
     background: black;
   }
-  .mobLayout {
-    max-width: 420px;
-    height: 100vh;
-    margin: 0 auto;
-  }
+  
   @media only screen and (max-width: 768px) {
     body {
       -webkit-tap-highlight-color: transparent;
@@ -55,44 +51,6 @@
 }
 
 @layer components {
-}
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.getStartedSwiper .swiper-pagination-bullets.swiper-pagination-horizontal {
-  text-align: center;
-}
-
-.getStartedSwiper
-  .swiper-pagination-bullets.swiper-pagination-horizontal.swiper-pagination-bullets
-  .swiper-pagination-bullet {
-  background-color: #cbd5e1;
-  display: inline-flex;
-  gap: 4px;
-}
-.getStartedSwiper
-  .swiper-pagination-bullets.swiper-pagination-horizontal.swiper-pagination-bullets
-  .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background-color: #0f172a;
 }
 
 .spinner div {
