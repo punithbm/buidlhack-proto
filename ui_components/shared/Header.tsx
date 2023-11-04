@@ -7,10 +7,12 @@ import { useAccount } from "wagmi";
 import { serializeError } from "eth-rpc-errors";
 import Link from "next/link";
 import { InputField } from ".";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const { isConnecting, address, isConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
+  const router = useRouter();
   const [connecting, setConnecting] = useState(false);
   const [showQR, setShowQr] = useState(false);
   const [showDeposit, setShowDeposit] = useState(false);
@@ -23,8 +25,7 @@ const Header = () => {
   };
 
   const handleWalletConnectFlow = () => {
-    console.log(address, "address");
-    console.log("Wallet Connected Successfully");
+    router.push("/proto");
   };
 
   useEffect(() => {
@@ -53,10 +54,10 @@ const Header = () => {
         className={`h-[64px] w-full rounded-3xl left-0 bg-[#1C1C1F] dark:bg-secondaryDark-50 top-0 z-[99] lg:flex items-center hidden`}
       >
         <nav className="flex items-center justify-between w-full px-4 gap-x-6">
-          <div className="flex items-center gap-2">
+          <Link href={"/"} className="flex items-center gap-2">
             <Image width={42} src={icons.logo} alt="logo" />
             <p className="text-white font-bold text-base">Proto</p>
-          </div>
+          </Link>
           <InputField
             type={"text"}
             id={"search"}
@@ -73,12 +74,10 @@ const Header = () => {
               <Image src={icons.walletIcon} alt="wallet" />
               Connect
             </button>
-            <Link href="/">
-              <Image src={icons.settings} alt="setting" />
-            </Link>
-            <Link href="/">
-              <Image src={icons.help} alt="setting" />
-            </Link>
+
+            <Image src={icons.settings} alt="setting" />
+
+            <Image src={icons.help} alt="setting" />
           </div>
         </nav>
       </header>
