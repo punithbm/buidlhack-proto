@@ -130,6 +130,7 @@ module.exports = {
 
       boxShadow: {
         sm: "0px 1px 2px 0px #0000000D",
+        "7xl": " 0px 4px 4px 0px #00000040",
       },
 
       animation: {

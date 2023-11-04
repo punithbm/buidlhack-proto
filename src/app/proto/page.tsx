@@ -1,9 +1,10 @@
-import { PortfolioCard } from "@/ui_components/home";
+import { PortfolioCard, PortfolioTabs } from "@/ui_components/proto";
 
 function Root() {
   return (
     <div className="h-full">
       <PortfolioCard />
+      <PortfolioTabs />
     </div>
   );
 }

@@ -2,38 +2,13 @@ import { icons } from "@/utils/images";
 import Image from "next/image";
 import { FC } from "react";
 import Actions from "../shared/Actions";
-import { IActionData } from "../shared/types";
+
 import { AvatarGroup } from "../shared";
+import { portfolioActionData } from "@/constants";
 
 const PortfolioCard: FC = (props) => {
-  const portfolioActionData: IActionData[] = [
-    {
-      title: "Send",
-      icon: icons.sendIcon.src,
-      url: "/send",
-      isEnabled: false,
-    },
-    {
-      title: "Receive",
-      icon: icons.receiveIcon.src,
-      url: "/receive",
-      isEnabled: false,
-    },
-    {
-      title: "Swap",
-      icon: icons.swapIcon.src,
-      url: "/swap",
-      isEnabled: false,
-    },
-    {
-      title: "Buy / Sell",
-      icon: icons.buyIcon.src,
-      url: "/buy",
-      isEnabled: false,
-    },
-  ];
   return (
-    <div className="relative bg-[#1C1C1F] rounded-3xl p-5 mt-8">
+    <div className="relative bg-[#1C1C1F] rounded-3xl p-5 mt-8 mb-6">
       <div className="md:flex md:justify-center mb-7">
         <div className="portfolioNetWorth md:w-2/6 bg-[#F3FFA8] pb-6 py-10 px-[30px] rounded-3xl">
           <div className="mb-2.5">

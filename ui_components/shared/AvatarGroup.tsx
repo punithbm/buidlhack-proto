@@ -1,3 +1,4 @@
+"use client";
 import { getNounAvatar } from "@/utils";
 import { FC } from "react";
 

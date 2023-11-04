@@ -1,7 +1,9 @@
 export const productName = "Clink Safe";
 export const rainbowKitProjectId = "fb3037b60ba3165d90a7f1bb1a727cc5";
+import { IActionData } from "@/ui_components/shared/types";
 import { icons } from "@/utils/images";
 
+export const DEFAULT_TOKEN_DECIMALS = 18;
 export enum BUTTON_SIZE {
   MEDIUM = "medium",
   LARGE = "large",
@@ -35,27 +37,32 @@ export enum THEME_COLOR {
   DARK = "dark",
 }
 
-export const actionData = [
-  {
-    title: "Swap",
-    icon: {
-      src: icons.swapIcon as string,
-    },
-  },
-  {
-    title: "Bridge",
-    icon: {
-      src: icons.bridgeIcon as string,
-    },
-  },
+export const portfolioActionData: IActionData[] = [
   {
     title: "Send",
-    icon: {
-      src: icons.sendIcon as string,
-    },
+    icon: icons.sendIcon.src,
+    url: "/send",
+    isEnabled: false,
+  },
+  {
+    title: "Receive",
+    icon: icons.receiveIcon.src,
+    url: "/receive",
+    isEnabled: false,
+  },
+  {
+    title: "Swap",
+    icon: icons.swapIcon.src,
+    url: "/swap",
+    isEnabled: false,
+  },
+  {
+    title: "Buy / Sell",
+    icon: icons.buyIcon.src,
+    url: "/buy",
+    isEnabled: false,
   },
 ];
-
 export const headerDetail = [
   { title: "Title 1", value: "25" },
   { title: "Title 2", value: "5" },

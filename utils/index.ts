@@ -21,6 +21,7 @@ import Web3 from "web3";
 import { ACTIONS } from "@/store/GlobalContext";
 import { getStore } from "@/store/GlobalStore";
 import { IToastType } from "@/store/reducers/popupStateReducer";
+import { DEFAULT_TOKEN_DECIMALS } from "@/constants";
 
 export const trimAddress = (val: string, charsToKeep: number) => {
   if (!val) {
@@ -554,4 +555,12 @@ export const trucateString = (val: string | undefined, length = 10) => {
     length,
     omission: "...",
   });
+};
+
+export const formatTokenAmount = (_amount: number | string | undefined) => {
+  if (!_amount) return 0;
+  if (typeof _amount === "string") {
+    _amount = Number(_amount);
+  }
+  return Number(_amount.toFixed(DEFAULT_TOKEN_DECIMALS));
 };
