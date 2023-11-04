@@ -1,0 +1,25 @@
+.heading1_bold {
+  @apply font-bold xl:text-4xl xl:leading-normal;
+}
+
+.heading1_medium {
+  @apply font-medium xl:text-4xl xl:leading-normal;
+}
+
+.heading2_bold {
+  @apply font-bold xl:text-2xl xl:leading-normal;
+}
+.heading2_semibold {
+  @apply font-semibold text-2xl leading-normal;
+}
+
+.paragraph {
+  @apply font-normal text-base leading-6;
+}
+.supportText {
+  @apply font-normal text-sm leading-normal;
+}
+
+.meta {
+  @apply font-normal text-xs;
+}
