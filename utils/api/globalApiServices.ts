@@ -16,10 +16,11 @@ export const globalGetService = <TParamType, U>(
     })
       .then((response: AxiosResponse<U>) => {
         if (instance == "decommas") {
+          console.log(response, "response from getapi");
           const _response: TResponse<U> = {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
-            data: response.data.data,
+            data: response.data,
             statusCode: response.status,
             message: response.statusText,
           };
