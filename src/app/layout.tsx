@@ -18,7 +18,7 @@ export default function RootLayout(props: {
       <body className="h-full">
         <WagmiWrapper>
           <Header />
-          <main className="h-full pt-16">
+          <main className="h-full">
             <div className="container mx-auto">{props.children}</div>
           </main>
         </WagmiWrapper>

@@ -22,8 +22,8 @@ const Actions: FC<IActionsPropsType> = (props) => {
                 <Button
                   className={`grow w-full rounded-lg ${
                     item?.isEnabled
-                      ? "!bg-[#00E599] text-[#FFFFFF]"
-                      : "!bg-[#C8FEEC] text-[#008257] pointer-events-none cursor-not-allowed"
+                      ? "!bg-[#44484F] text-[#FFFFFF]"
+                      : "!bg-[#44484F] text-[#008257] pointer-events-none cursor-not-allowed"
                   } ${btnClassName ?? ""}`}
                   variant="primary"
                   onClick={() =>
@@ -31,8 +31,8 @@ const Actions: FC<IActionsPropsType> = (props) => {
                   }
                 >
                   <img
-                    src={item?.icon}
-                    alt={item?.title as string}
+                    src={item.icon}
+                    alt={item.title as string}
                     height={32}
                     width={32}
                   />
