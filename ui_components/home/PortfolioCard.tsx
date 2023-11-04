@@ -1,8 +1,31 @@
 import { icons } from "@/utils/images";
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC } from "react";
+import Actions from "../shared/Actions";
+import { IActionData } from "../shared/types";
 
 const PortfolioCard: FC = (props) => {
+  const portfolioActionData: IActionData[] = [
+    {
+      title: "Send",
+      icon: icons.sendIcon,
+      url: "/send",
+      isEnabled: false,
+    },
+    {
+      title: "Swap",
+      icon: icons.swapIcon,
+      url: "/swap",
+      isEnabled: false,
+    },
+    {
+      title: "Bridge",
+      icon: icons.bridgeIcon,
+
+      url: "/bridge",
+      isEnabled: true,
+    },
+  ];
   return (
     <div className="portfolioCard mb-6 mt-6">
       <div className="relative bg-[#1C1C1F]  border border-solid rounded-lg !shadow-[none] !border-[#CCCCCC] !p-0">
@@ -30,6 +53,17 @@ const PortfolioCard: FC = (props) => {
               </div>
             </div>
           </div>
+        </div>
+        <div role={"presentation"} className="md:mx-8 my-6">
+          <Actions
+            actionData={portfolioActionData}
+            className="test"
+            // handleRoute={(data) => {
+            //   if (data) {
+            //     router.push(`/${data}`);
+            //   }
+            // }}
+          />
         </div>
       </div>
     </div>

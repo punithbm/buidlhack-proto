@@ -82,3 +82,26 @@
     transform: rotate(360deg);
   }
 }
+
+.button-primary {
+  @apply text-sm font-medium leading-5 rounded-lg cursor-pointer text-white dark:text-textDark-900 dark:!bg-primaryDark-500 !bg-primary-500 hover:!bg-primary-600;
+}
+
+.button-secondary {
+  @apply text-sm font-medium leading-5 rounded-lg cursor-pointer text-primary-500 !bg-primary-100 dark:!bg-primaryDark-100 border-primary-100 dark:border-primaryDark-100 border-solid border dark:hover:border-primaryDark-500 hover:border-primary-500;
+}
+.button-outlined {
+  @apply text-sm font-medium leading-5 rounded-lg cursor-pointer text-primary-500 border-solid border border-white hover:!bg-white/20;
+}
+
+.button-ghost {
+  @apply text-sm font-medium leading-5 rounded-lg cursor-pointer text-primary-500 hover:!bg-primary-100 dark:text-primaryDark-500 dark:hover:!bg-primaryDark-100;
+}
+
+.button-medium {
+  @apply px-4 py-2.5;
+}
+
+.button-large {
+  @apply px-6 py-4;
+}
