@@ -1,22 +1,24 @@
 import chevronLeftWhite from "../../public/assets/images/chevron_left_white.svg";
 import logo from "../../public/assets/images/logo.png";
-import bridgeIcon from "../../public/assets/images/bridge_icon.svg";
-import sendIcon from "../../public/assets/images/send_icon.svg";
+import sendIcon from "../../public/assets/images/send.svg";
 import swapIcon from "../../public/assets/images/swap_icon.svg";
 import walletIcon from "../../public/assets/images/wallet_icon.svg";
 import settings from "../../public/assets/images/settings.svg";
 import help from "../../public/assets/images/help.svg";
 import search from "../../public/assets/images/search.svg";
+import receiveIcon from "../../public/assets/images/receive.svg";
+import buyIcon from "../../public/assets/images/buy.svg";
 
 export type TImages =
   | "chevronLeftWhite"
   | "logo"
-  | "bridgeIcon"
   | "sendIcon"
   | "swapIcon"
   | "settings"
   | "help"
   | "search"
+  | "receiveIcon"
+  | "buyIcon"
   | "walletIcon";
 
 export type TNextImage = {
@@ -25,14 +27,15 @@ export type TNextImage = {
   width: number;
 };
 
-export const icons: Record<TImages, string> = {
+export const icons: Record<TImages, TNextImage> = {
   chevronLeftWhite,
   logo,
-  bridgeIcon,
   sendIcon,
   swapIcon,
   walletIcon,
   settings,
   help,
   search,
+  receiveIcon,
+  buyIcon,
 };

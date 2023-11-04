@@ -13,17 +13,17 @@ const Actions: FC<IActionsPropsType> = (props) => {
         className ?? ""
       }`}
     >
-      <div className={`flex gap-5 w-full`}>
+      <div className={`flex gap-12 w-full`}>
         {actionData &&
           actionData?.length > 0 &&
           actionData?.map((item: IActionData, key: number) => (
             <React.Fragment key={key}>
               <div className="grow w-full hidden md:flex rounded-lg">
                 <Button
-                  className={`grow w-full rounded-lg ${
+                  className={`grow w-full rounded-lg font-semibold text-base ${
                     item?.isEnabled
                       ? "!bg-[#44484F] text-[#FFFFFF]"
-                      : "!bg-[#44484F] text-[#008257] pointer-events-none cursor-not-allowed"
+                      : "!bg-[#44484F] text-[#FFFFFF] pointer-events-none cursor-not-allowed"
                   } ${btnClassName ?? ""}`}
                   variant="primary"
                   onClick={() =>
@@ -33,8 +33,8 @@ const Actions: FC<IActionsPropsType> = (props) => {
                   <img
                     src={item.icon}
                     alt={item.title as string}
-                    height={32}
-                    width={32}
+                    height={24}
+                    width={24}
                   />
                   <span className="hidden md:block">{item?.title}</span>
                 </Button>

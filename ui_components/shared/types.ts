@@ -19,7 +19,7 @@ type TImage = {
 
 export interface IActionData {
   title: string | JSX.Element;
-  icon: string;
+  icon: TImages | string;
   mobileResponsiveIcon?: TImage;
   onClick?: () => void | string;
   url?: string;

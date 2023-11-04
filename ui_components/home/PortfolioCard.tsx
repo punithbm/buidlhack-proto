@@ -9,29 +9,36 @@ const PortfolioCard: FC = (props) => {
   const portfolioActionData: IActionData[] = [
     {
       title: "Send",
-      icon: icons.sendIcon,
+      icon: icons.sendIcon.src,
       url: "/send",
       isEnabled: false,
     },
     {
+      title: "Receive",
+      icon: icons.receiveIcon.src,
+      url: "/receive",
+      isEnabled: false,
+    },
+    {
       title: "Swap",
-      icon: icons.swapIcon,
+      icon: icons.swapIcon.src,
       url: "/swap",
       isEnabled: false,
     },
     {
-      title: "Bridge",
-      icon: icons.bridgeIcon,
-
-      url: "/bridge",
-      isEnabled: true,
+      title: "Buy / Sell",
+      icon: icons.buyIcon.src,
+      url: "/buy",
+      isEnabled: false,
     },
   ];
   return (
     <div className="relative bg-[#1C1C1F] rounded-3xl p-5 mt-8">
       <div className="md:flex md:justify-center mb-7">
         <div className="portfolioNetWorth md:w-2/6 bg-[#F3FFA8] pb-6 py-10 px-[30px] rounded-3xl">
-          <AvatarGroup />
+          <div className="mb-2.5">
+            <AvatarGroup />
+          </div>
           <p className="text-base text-[#474E66] font-normal">Networth</p>
           <p className="text-[32px] font-black text-[#0A0D14] mb-5">
             $255.<span className="font-semibold opacity-50">20</span>
@@ -89,7 +96,7 @@ const PortfolioCard: FC = (props) => {
       <div role={"presentation"} className="">
         <Actions
           actionData={portfolioActionData}
-          btnClassName=""
+          className="mb-2"
           // handleRoute={(data) => {
           //   if (data) {
           //     router.push(`/${data}`);

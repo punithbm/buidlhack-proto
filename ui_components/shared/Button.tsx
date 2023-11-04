@@ -33,7 +33,7 @@ const Button = ({
     >
       {leftIcon && (
         <img
-          src={icons[leftIcon]}
+          src={icons[leftIcon].src}
           alt="left icon"
           className={` ${size === BUTTON_SIZE.LARGE ? "h-6 w-6" : "w-5 h-5"} `}
         />
@@ -41,7 +41,7 @@ const Button = ({
       {label ?? children ?? null}
       {rightIcon && (
         <img
-          src={icons[rightIcon]}
+          src={icons[rightIcon].src}
           alt="right icon"
           className={` ${size === BUTTON_SIZE.LARGE ? "h-6 w-6" : "w-5 h-5"}`}
         />

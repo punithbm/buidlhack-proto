@@ -6,7 +6,7 @@ const AvatarGroup: FC = () => {
     <div className="flex -space-x-2 overflow-hidden">
       <img
         className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
-        src={getNounAvatar("0x121F9CB6aF512FEFe32cB77f1aae7cDE594C033a")}
+        src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         alt=""
       />
       <img
