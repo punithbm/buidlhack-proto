@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { Header } from "@/ui_components/shared";
 import { Metadata } from "next";
 import * as React from "react";
 
@@ -13,8 +14,11 @@ export default function RootLayout(props: {
 }) {
   return (
     <html lang="en">
-      <body className="h-full bg-white">
-        <main className="h-full">{props.children}</main>
+      <body className="h-full">
+        <Header />
+        <main className="h-full pt-16">
+          <div className="container mx-auto">{props.children}</div>
+        </main>
       </body>
     </html>
   );

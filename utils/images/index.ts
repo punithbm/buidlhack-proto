@@ -1,6 +1,7 @@
 import chevronLeftWhite from "../../public/assets/images/chevron_left_white.svg";
+import logo from "../../public/assets/images/logo.svg";
 
-export type TImages = "chevronLeftWhite";
+export type TImages = "chevronLeftWhite" | "logo";
 
 export type TNextImage = {
   src: string;
@@ -10,4 +11,5 @@ export type TNextImage = {
 
 export const icons: Record<TImages, string> = {
   chevronLeftWhite,
+  logo,
 };

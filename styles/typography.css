@@ -1,25 +1,42 @@
-.heading1_bold {
-  @apply font-bold xl:text-4xl xl:leading-normal;
+.heading1 {
+  @apply font-sans font-bold text-5xl	 leading-10;
+}
+.heading1_regular {
+  @apply font-sans font-normal;
 }
 
-.heading1_medium {
-  @apply font-medium xl:text-4xl xl:leading-normal;
+.heading2 {
+  @apply font-sans font-bold text-lg leading-7 lg:text-xl lg:leading-10;
+}
+.heading2_medium {
+  @apply font-sans font-medium text-lg leading-7 lg:text-xl lg:leading-10;
 }
 
-.heading2_bold {
-  @apply font-bold xl:text-2xl xl:leading-normal;
+.heading2_regular {
+  @apply font-sans font-normal text-lg leading-7 lg:text-xl lg:leading-10;
 }
-.heading2_semibold {
-  @apply font-semibold text-2xl leading-normal;
+.heading3 {
+  @apply font-sans font-bold text-lg leading-7;
+}
+.heading3_medium {
+  @apply font-sans font-medium text-xl leading-7;
 }
 
+.heading3_regular {
+  @apply font-sans font-normal text-sm leading-[21px] lg:text-lg lg:leading-7;
+}
 .paragraph {
-  @apply font-normal text-base leading-6;
-}
-.supportText {
-  @apply font-normal text-sm leading-normal;
+  @apply font-sans font-normal text-sm leading-[21px];
 }
 
-.meta {
-  @apply font-normal text-xs;
+.paragraph_medium {
+  @apply font-sans  font-medium text-sm leading-[21px];
+}
+
+.paragraph_bold {
+  @apply font-sans font-bold text-sm leading-[21px];
+}
+
+.support_text {
+  @apply font-sans font-normal text-xs leading-4;
 }
