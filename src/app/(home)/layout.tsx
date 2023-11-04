@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import * as React from "react";
 
 export const metadata: Metadata = {
-  title: "Clink-Gift Homepage",
+  title: "Homepage",
   description: "Home page",
 };
 
