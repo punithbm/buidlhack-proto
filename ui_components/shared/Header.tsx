@@ -50,13 +50,13 @@ const Header = () => {
       >
         <nav className="flex items-center justify-between w-full px-4 gap-x-6">
           <Link href={"/"} className="flex items-center gap-2">
-            <Image width={42} src={icons.logo} alt="logo" />
-            <p className="text-white font-bold text-base">Proto</p>
+            <Image width={82} src={icons.logo} alt="logo" />
+            {/* <p className="text-white font-bold text-base">Proto</p> */}
           </Link>
           <InputField
             type={"text"}
             id={"search"}
-            placeholder="Search for NFTs"
+            placeholder="Search for Tokens, Address or NFTs"
             className="w-2/5"
           />
           <div className="flex items-center gap-6">

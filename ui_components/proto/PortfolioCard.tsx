@@ -13,24 +13,11 @@ import {
   SELECTED_CHAIN_KEY,
   TOKEN_NETWORTH_KEY,
 } from "@/utils/api/constants";
-
 const PortfolioCard: FC = (props) => {
   const chainsList = [
     {
       name: "All Chains",
       id: "all",
-    },
-    {
-      name: "Arbitrum",
-      id: "arbitrum",
-    },
-    {
-      name: "Optimism",
-      id: "optimism",
-    },
-    {
-      name: "Polygon",
-      id: "polygon",
     },
     {
       name: "Op BNB",
@@ -41,12 +28,16 @@ const PortfolioCard: FC = (props) => {
       id: "linea",
     },
     {
-      name: "Arbitrum-Nova",
-      id: "arbitrum_nova",
-    },
-    {
       name: "Polygon ZKEVM",
       id: "polygon_zkevm",
+    },
+    {
+      name: "Arbitrum",
+      id: "arbitrum",
+    },
+    {
+      name: "Optimism",
+      id: "optimism",
     },
   ];
 
@@ -114,30 +105,29 @@ const PortfolioCard: FC = (props) => {
           </p>
           <ul>
             <li className="flex items-center justify-between mb-4 last:mb-0">
-              <p className="text-[#464E59] text-sm font-normal">Tokens</p>
-
+              <p className="text-[#464E59] text-m font-normal">Tokens</p>
               <p
-                className={`font-medium text-sm text-[#0A0D14] flex items-center `}
+                className={`font-semibold text-m text-[#0A0D14] flex items-center `}
               >
-                {`$ ${tokensNetworth}`}
+                {`$${tokensNetworth}`}
               </p>
             </li>
             <li className="flex items-center justify-between mb-4 last:mb-0">
-              <p className="text-[#464E59] text-sm font-normal">NFTs</p>
+              <p className="text-[#464E59] text-m font-normal">NFTs</p>
 
               <p
-                className={`font-medium text-sm text-[#0A0D14] flex items-center `}
+                className={`font-semibold text-sm text-[#0A0D14] flex items-center `}
               >
-                {`$ ${nftNetworth}`}
+                {`$${nftNetworth}`}
               </p>
             </li>
             <li className="flex items-center justify-between mb-4 last:mb-0">
               <p className="text-[#464E59] text-sm font-normal">DEFI</p>
 
               <p
-                className={`font-medium text-sm text-[#0A0D14] flex items-center `}
+                className={`font-semibold text-sm text-[#0A0D14] flex items-center `}
               >
-                {`$ ${defiNetworth}`}
+                {`$${defiNetworth}`}
               </p>
             </li>
           </ul>
@@ -145,8 +135,7 @@ const PortfolioCard: FC = (props) => {
         <div className="md:w-4/6 px-8">
           <div className="hidden md:block">
             <div className="relative flex items-start justify-between md:mt-0">
-              <Image alt="logo" src={icons.logo} className="w-10" />
-              {/* <div className="absolute top-5 left-5 lg:left-7">
+              <div className="absolute top-5 left-5 lg:left-7">
                   <p className="paragraph_bold pb-1 text-text-500  tracking-[0.2px]">
                     Performance graph of your assets
                   </p>
@@ -155,14 +144,19 @@ const PortfolioCard: FC = (props) => {
                     <br />
                     chains collectively in our bundle view.
                   </p>
-                </div> */}
+                  <p className="paragraph text-text-300 mt-4">
+                    <br />
+                    Portfolio performance graph coming soon...
+                  </p>
+                </div>
+                <div></div>
               <details className="dropdown">
                 <summary className="cursor-pointer w-[150px] border border-[#CCCCCC] bg-white py-1 px-4 rounded-full flex items-center justify-center">
                   {/* {selectedChain ? selectedChain.name : ""} */}
                   <p
                     className={`font-medium text-sm text-[#0A0D14] flex items-center `}
                   >
-                    All chains
+                    All Chains
                   </p>
                 </summary>
                 <ul className="p-2 shadow menu dropdown-content z-[50] bg-white border border-[#CCCCCC] rounded-lg rounded-box w-[150px] ">
