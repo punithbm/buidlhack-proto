@@ -99,9 +99,10 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
       );
       const networth =
         defiInv &&
-        defiInv?.reduce(
+        defiInv.reduce(
           (accumulator, currentValue) =>
-            Number(accumulator) + Number(currentValue)
+            Number(accumulator) + Number(currentValue),
+          0
         );
       setDefiNetworth(networth?.toFixed(4) as unknown as number);
       setDefiList(defiList);
@@ -117,7 +118,8 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
         nftsNW &&
         nftsNW?.reduce(
           (accumulator: number, currentValue: number) =>
-            Number(accumulator) + Number(currentValue)
+            Number(accumulator) + Number(currentValue),
+          0
         );
       setNftNetworth(networth as unknown as number);
       setNftsList(nftList);
