@@ -97,10 +97,12 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
       const defiInv = defiList?.map(
         (item: IDefiItem) => item.position.net_usd_value as unknown as number
       );
-      const networth = defiInv?.reduce(
-        (accumulator, currentValue) =>
-          Number(accumulator) + Number(currentValue)
-      );
+      const networth =
+        defiInv &&
+        defiInv?.reduce(
+          (accumulator, currentValue) =>
+            Number(accumulator) + Number(currentValue)
+        );
       setDefiNetworth(networth?.toFixed(4) as unknown as number);
       setDefiList(defiList);
     }
@@ -111,10 +113,12 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
       const nftsNW = nftList?.map(
         (item: any) => item.floorPrice as unknown as number
       );
-      const networth = nftsNW?.reduce(
-        (accumulator: number, currentValue: number) =>
-          Number(accumulator) + Number(currentValue)
-      );
+      const networth =
+        nftsNW &&
+        nftsNW?.reduce(
+          (accumulator: number, currentValue: number) =>
+            Number(accumulator) + Number(currentValue)
+        );
       setNftNetworth(networth as unknown as number);
       setNftsList(nftList);
     }
