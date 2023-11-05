@@ -12,7 +12,6 @@ const NFTList: FC<INftListProps> = (props) => {
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 gap-5 mx-5 mb-5">
       {nftList?.slice(0, 10).map((item: any, key: number) => {
-        console.log(item, "nft image item");
         return (
           <div
             key={key}

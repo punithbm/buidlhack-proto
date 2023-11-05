@@ -24,7 +24,7 @@ export const fetchTokensList = (
           ...response,
           data: response.data,
         };
-        console.log(response, "response");
+
         resolve(_response);
       })
       .catch((err) => {
@@ -63,14 +63,12 @@ export const fetchNftsItem = (
   params?: any
 ): Promise<TResponse<INftMetaItem>> => {
   return new Promise((resolve, reject) => {
-    console.log("method called");
     globalGetService<any | null, INftMetaItem>(
       `nft_metadata/${chain}/${address}/${token_id}`,
       params || null,
       "decommas"
     )
       .then((response) => {
-        console.log(response, "item response");
         const _response = {
           ...response,
           data: response.data,
@@ -121,7 +119,7 @@ export const fetchActivityList = (
           ...response,
           data: response.data,
         };
-        console.log(response, "response");
+
         resolve(_response);
       })
       .catch((err) => {

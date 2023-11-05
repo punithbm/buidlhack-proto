@@ -24,14 +24,13 @@ function Root() {
     limit: 100,
   };
   const { tokensList, tokensListLoader, tokenTotalUSD } = useTokensList(
-    "0x06e70f295B6337c213DDe82D13cc198027687A7B",
+    address,
     tokenParams
   );
   const { activityList, activityLoader } = useActivityList(
-    "0x06e70f295B6337c213DDe82D13cc198027687A7B",
+    address,
     activityParams
   );
-  console.log(activityList, "activityList");
 
   return (
     <div className="h-full pt-12 pb-20">

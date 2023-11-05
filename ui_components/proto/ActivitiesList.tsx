@@ -1,13 +1,11 @@
 "use client";
-import {
-  IActivityListFormatted,
-  IActivityListItem,
-} from "@/utils/api/apiTypes";
+import { IActivityListItem } from "@/utils/api/apiTypes";
 import { FC } from "react";
 import { ActivitiesTableHeader, Shimmer } from ".";
 import Image from "next/image";
 import { icons } from "@/utils/images";
 import { getFromTo, getTransactionTypeName, trimAddress } from "@/utils";
+import { NoState } from "../shared";
 
 export interface IActivitiesTablePropsType {
   activitiesList?: IActivityListItem[];
@@ -28,58 +26,67 @@ const ActivitiesList: FC<IActivitiesTablePropsType> = ({
       >
         <ActivitiesTableHeader />
       </div>
-      <div className={`tableBody md:overflow-hidden lg:overflow-auto`}>
-        {activitiesList?.map((_item, key) => (
-          <div
-            key={key}
-            className={`tableRow relative w-full flex first:border-none border-t border-secondary-100`}
-          >
+      {loader ? (
+        <Shimmer type="activity" />
+      ) : activitiesList && activitiesList?.length > 0 ? (
+        <div className={`tableBody md:overflow-hidden lg:overflow-auto`}>
+          {activitiesList?.map((_item, key) => (
             <div
-              role="presentation"
-              className="grid flex-1 w-full items-center relative py-4 md:py-3.5 grid-cols-2 md:grid-cols-3 lg:grid-cols-activitiesTable hover:bg-base-500 "
+              key={key}
+              className={`tableRow relative w-full flex first:border-none border-t border-secondary-100 hover:bg-base-500 last:hover:rounded-b-2xl`}
             >
               <div
-                className={`tableBodyCell px-8 text-left flex items-center gap-2`}
+                role="presentation"
+                className="grid flex-1 w-full items-center relative py-4 md:py-3.5 grid-cols-2 md:grid-cols-3 lg:grid-cols-activitiesTable  "
               >
-                <Image src={icons.sent} alt="sent" />
-                <div>
-                  <p className="text-black mb-1 text-sm">
-                    {getTransactionTypeName(_item.method)}
-                  </p>
-                  <p className="text-[#666780] text-xs">
-                    {getFromTo(_item.method)}:{" "}
-                    {trimAddress(_item?.to_address, 5)}
-                  </p>
+                <div
+                  className={`tableBodyCell px-8 text-left flex items-center gap-2`}
+                >
+                  <Image src={icons.sent} alt="sent" />
+                  <div>
+                    <p className="text-black mb-1 text-sm">
+                      {getTransactionTypeName(_item.method)}
+                    </p>
+                    <p className="text-[#666780] text-xs">
+                      {getFromTo(_item.method)}:{" "}
+                      {trimAddress(_item?.to_address, 5)}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div
-                className={`tableBodyCell px-8 text-left flex items-center gap-2`}
-              >
-                <Image src={icons.sent} alt="sent" />
-                <div>
-                  <p className="text-black mb-1 text-sm">0.11 ETH</p>
-                  <p className="text-[#666780] text-xs">$1,897.00</p>
+                <div
+                  className={`tableBodyCell px-8 text-left flex items-center gap-2`}
+                >
+                  <Image src={icons.sent} alt="sent" />
+                  <div>
+                    <p className="text-black mb-1 text-sm">0.11 ETH</p>
+                    <p className="text-[#666780] text-xs">$1,897.00</p>
+                  </div>
                 </div>
-              </div>
-              <div
-                className={`tableBodyCell px-8 text-left flex items-center gap-1`}
-              >
-                <Image
-                  src={_item?.status ? icons.greenCheck : icons.redCross}
-                  alt="success"
-                />
-                <p
-                  className={`text-sm  ${
-                    _item?.status ? "text-[#18935F]" : "text-[#CA291F]"
-                  }`}
-                >{`${_item?.status ? "Success" : "Failed"}`}</p>
+                <div
+                  className={`tableBodyCell px-8 text-left flex items-center gap-1`}
+                >
+                  <Image
+                    src={_item?.status ? icons.greenCheck : icons.redCross}
+                    alt="success"
+                  />
+                  <p
+                    className={`text-sm  ${
+                      _item?.status ? "text-[#18935F]" : "text-[#CA291F]"
+                    }`}
+                  >{`${_item?.status ? "Success" : "Failed"}`}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        {/* {isLoading ? <Shimmer type="activity" /> : null} */}
-        {loader ? <p>Loading...</p> : null}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <NoState
+          title="No activities found"
+          image={icons.noState.src}
+          className="p-2"
+          titleClassName="mb-6"
+        />
+      )}
     </div>
   );
 };

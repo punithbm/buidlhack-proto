@@ -29,7 +29,6 @@ const Header = () => {
     } else {
       router.push("/");
     }
-    console.log(isConnected, "isConnected");
   }, [isConnected]);
 
   const handleExternalWalletClick = async () => {
