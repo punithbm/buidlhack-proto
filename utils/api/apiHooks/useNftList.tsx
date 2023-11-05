@@ -13,12 +13,9 @@ const fetchNftListHelper = async ({
   const nftList: any = [];
   try {
     const rs = await fetchNftsList(address, params);
-    console.log("🚀 ~ file: useNftList.tsx:16 ~ rs:", rs);
 
     if (rs && rs.data && rs.data.result) {
-      console.log("came inside if");
       for (const item of rs.data.result) {
-        console.log("came inside for", item);
         const res = await fetchNftsItem(
           item.contract_address,
           item.chain_name,
@@ -26,10 +23,6 @@ const fetchNftListHelper = async ({
           { "api-key": params["api-key"] }
         );
 
-        // Process the 'res' data and add it to 'nftList' if needed
-        console.log(res, "nft response");
-
-        // Example: Add the name to 'nftList'
         nftList.push({
           name: res.data.result.collection_name,
           floorPrice: item.amount,

@@ -12,7 +12,6 @@ const fetchTokensListHelper = ({
   params: any;
 }) =>
   fetchTokensList(address, params).then((rs) => {
-    console.log(rs, "res");
     return rs?.data?.result || [];
   });
 

@@ -595,6 +595,20 @@ export const tokenListTotalUSD = (arr: any) => {
     0
   );
 };
+export const nftListTotalUSD = (arr: any) => {
+  return arr?.reduce(
+    (a: any, b: any) =>
+      Number(a) + Number(b.amount) * Number(convertNumToNonExp(b.actual_price)),
+    0
+  );
+};
+export const defiListTotalUSD = (arr: any) => {
+  return arr?.reduce(
+    (a: any, b: any) =>
+      Number(a) + Number(b.amount) * Number(convertNumToNonExp(b.actual_price)),
+    0
+  );
+};
 export const convertNumToNonExp = (num: number | string) => {
   const EXP_SYMBOL = "e";
   const MAX_LIMIT = 99;

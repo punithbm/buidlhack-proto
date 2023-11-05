@@ -10,7 +10,6 @@ const fetchDefiListHelper = ({
   params: any;
 }) =>
   fetchDefiList(address, params).then((rs) => {
-    console.log(rs, "res");
     return rs?.data?.result || [];
   });
 

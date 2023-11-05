@@ -24,7 +24,6 @@ export const fetchTokensList = (
           ...response,
           data: response.data,
         };
-
         resolve(_response);
       })
       .catch((err) => {
@@ -119,7 +118,6 @@ export const fetchActivityList = (
           ...response,
           data: response.data,
         };
-
         resolve(_response);
       })
       .catch((err) => {

@@ -9,7 +9,7 @@ import {
 } from "@/utils";
 import { useDefiList } from "@/utils/api/apiHooks/useDefiList";
 import { ADDRESS_KEY } from "@/utils/api/constants";
-import { IDefiItem, IDefiList } from "@/utils/api/apiTypes";
+import { IDefiItem, IDefiList, INftItem } from "@/utils/api/apiTypes";
 import { useNftList } from "@/utils/api/apiHooks/useNftList";
 
 export interface IPortfolioTabsProps {
@@ -25,6 +25,8 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
   const [activeTab, setActiveTab] = useState<number>(0);
   const tokenValueFormat = getCurrencyFormattedString(tokenTotalUSD);
   const tokenSplitNetWorth = splitDecimals(tokenValueFormat);
+  const [nftNetworth, setNftNetworth] = useState(0);
+  const [defiNetworth, setDefiNetworth] = useState(0);
   const tabsData = [
     {
       id: 0,
@@ -40,7 +42,7 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
     {
       id: 1,
       title: "NFTs",
-      netWorth: "$7,627.29",
+      netWorth: `$ ${nftNetworth}`,
       icons: [
         {
           icon: "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -57,7 +59,7 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
     {
       id: 2,
       title: "DeFi Investments",
-      netWorth: "$7,627.29",
+      netWorth: `$ ${defiNetworth}`,
       icons: [
         {
           icon: "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -90,19 +92,31 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
     "api-key": process.env.NEXT_PUBLIC_DECOMMAS_API_ACCESS_KEY,
   });
 
-  console.log(nftList, "nft list fromhooks");
-
   useEffect(() => {
     if (!defiListLoader) {
+      const defiInv = defiList?.map(
+        (item: IDefiItem) => item.position.net_usd_value as unknown as number
+      );
+      const networth = defiInv?.reduce(
+        (accumulator, currentValue) =>
+          Number(accumulator) + Number(currentValue)
+      );
+      setDefiNetworth(networth?.toFixed(4) as unknown as number);
       setDefiList(defiList);
-      console.log(defiList, "defilist");
     }
   }, [defiListLoader]);
 
   useEffect(() => {
     if (!nftListLoader) {
+      const nftsNW = nftList?.map(
+        (item: any) => item.floorPrice as unknown as number
+      );
+      const networth = nftsNW?.reduce(
+        (accumulator: number, currentValue: number) =>
+          Number(accumulator) + Number(currentValue)
+      );
+      setNftNetworth(networth as unknown as number);
       setNftsList(nftList);
-      console.log(nftList, "nftList");
     }
   }, [nftListLoader]);
 
@@ -160,8 +174,10 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
       {activeTab === 0 && (
         <TokensList tokensList={tokensList} loader={tokensListLoader} />
       )}
-      {activeTab === 1 && <NFTList nftList={nftsList} />}
-      {activeTab === 2 && <DeFiList defiList={defiLists ?? []} />}
+      {activeTab === 1 && <NFTList nftList={nftsList} loader={nftListLoader} />}
+      {activeTab === 2 && (
+        <DeFiList defiList={defiLists ?? []} loader={defiListLoader} />
+      )}
     </div>
   );
 };
