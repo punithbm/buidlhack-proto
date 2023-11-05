@@ -148,32 +148,30 @@
   transform: translateY(0) rotate(312deg);
 }
 .portfolioCardInfo .portfolioIconBlk .iconCard.emptyIconCard img:nth-child(1) {
-  width: 54px;
+  width: 110px;
   height: 110px;
-  right: 37px;
-  bottom: 16px;
-  scale: 1.4;
+  right: -56px;
+  bottom: 40px;
 }
 .portfolioCardInfo .portfolioIconBlk .iconCard.emptyIconCard img:nth-child(2) {
-  width: 110px;
-  height: 40px;
-  right: 48px;
-  bottom: -4px;
+  width: 90px;
+  height: 90px;
+  right: 2px;
+  bottom: -84px;
   scale: 1.4;
 }
 .portfolioCardInfo .portfolioIconBlk .iconCard.emptyIconCard img:nth-child(3) {
-  width: 85px;
-  height: 50px;
-  left: -15px;
-  bottom: 0;
+  width: 44px;
+  height: 44px;
+  left: 104px;
+  bottom: 60px;
   scale: 1.4;
 }
 .portfolioCardInfo .portfolioIconBlk .iconCard.emptyIconCard img:nth-child(4) {
-  width: 60px;
-  height: 60px;
-  right: 105px;
-  bottom: 30px;
-  scale: 1.4;
+  width: 64px;
+  height: 64px;
+  right: 104px;
+  bottom: -26px;
 }
 .portfolioCardInfo .portfolioIconBlk .iconCard.singleIcon img:nth-child(1) {
   right: 50px;

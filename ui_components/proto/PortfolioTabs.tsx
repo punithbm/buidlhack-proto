@@ -2,24 +2,31 @@
 
 import { FC, useState } from "react";
 import { DeFiList, NFTList, TokensList } from ".";
+import { getCurrencyFormattedString, splitDecimals } from "@/utils";
 
-const PortfolioTabs: FC = () => {
+export interface IPortfolioTabsProps {
+  tokensList: any;
+  tokensListLoader: boolean;
+  tokenTotalUSD: number;
+}
+const PortfolioTabs: FC<IPortfolioTabsProps> = ({
+  tokensList,
+  tokensListLoader,
+  tokenTotalUSD,
+}) => {
+  const [activeTab, setActiveTab] = useState<number>(0);
+  const tokenValueFormat = getCurrencyFormattedString(tokenTotalUSD);
+  const tokenSplitNetWorth = splitDecimals(tokenValueFormat);
   const tabsData = [
     {
       id: 0,
       title: "Tokens",
-      netWorth: "$7,627.29",
-      icons: [
-        {
-          icon: "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-          name: "nft",
-        },
-        {
-          icon: "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-          name: "nft",
-        },
-      ],
-      hasData: true,
+      netWorth: tokenSplitNetWorth,
+      icons: tokensList?.slice(0, 4).map((item: any) => ({
+        icon: item.logo_url,
+        name: item.name,
+      })),
+      hasData: tokensList?.length > 1,
       bg: "#F5F3FB",
     },
     {
@@ -58,8 +65,6 @@ const PortfolioTabs: FC = () => {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState<number>(0);
-
   const handleSwitchTab = (id: number) => {
     setActiveTab(id);
   };
@@ -86,8 +91,9 @@ const PortfolioTabs: FC = () => {
                 <p className="text-lg leading-6 text-text-300 mb-2">
                   {_data?.title}
                 </p>
-                <p className="text-[32px] font-bold text-[#0A0D14] ">
-                  $7,627.<span className="text-[#BABDC2]">29</span>
+                <p className="text-[32px] font-bold text-[#0A0D14]">
+                  {_data?.netWorth}
+                  {/* <span className="text-[#BABDC2]">29</span> */}
                 </p>
 
                 <div
@@ -98,9 +104,9 @@ const PortfolioTabs: FC = () => {
                       !_data.hasData ? "iconCard emptyIconCard" : ""
                     } iconCard emptyIconCard ${
                       _data.hasData ? "iconCard multipleIcons" : "opacity-30"
-                    } ${_data.icons.length === 1 ? "singleIcon" : ""} `}
+                    } ${_data?.icons?.length === 1 ? "singleIcon" : ""} `}
                   >
-                    {_data?.icons?.map((_icons, key) => (
+                    {_data?.icons?.map((_icons: any, key: number) => (
                       <img key={key} src={_icons?.icon} alt={_icons?.name} />
                     ))}
                   </div>
@@ -110,7 +116,9 @@ const PortfolioTabs: FC = () => {
           </div>
         ))}
       </div>
-      {activeTab === 0 && <TokensList />}
+      {activeTab === 0 && (
+        <TokensList tokensList={tokensList} loader={tokensListLoader} />
+      )}
       {activeTab === 1 && <NFTList />}
       {activeTab === 2 && <DeFiList />}
     </div>

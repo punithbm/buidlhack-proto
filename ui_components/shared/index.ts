@@ -5,6 +5,7 @@ import Button from "./Button";
 import AvatarGroup from "./AvatarGroup";
 import AvatarPlaceholder from "./AvatarPlaceholder";
 import ImageWithFallback from "./ImageWithFallback";
+import NoState from "./NoState";
 
 export {
   InputField,
@@ -14,4 +15,5 @@ export {
   AvatarGroup,
   ImageWithFallback,
   AvatarPlaceholder,
+  NoState,
 };

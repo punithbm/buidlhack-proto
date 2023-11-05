@@ -587,3 +587,55 @@ export const getFromLocalStorage = (key: string) => {
 export const isVideo = (url: string) => {
   return !url ? false : /\.(mp4|mov|3gp|ogg)$/.test(url);
 };
+
+export const tokenListTotalUSD = (arr: any) => {
+  return arr?.reduce(
+    (a: any, b: any) =>
+      Number(a) + Number(b.amount) * Number(convertNumToNonExp(b.actual_price)),
+    0
+  );
+};
+export const convertNumToNonExp = (num: number | string) => {
+  const EXP_SYMBOL = "e";
+  const MAX_LIMIT = 99;
+  const MIN_LIMIT = 0;
+  const MIN_NUMBER = "0";
+
+  if (Number(num) < 0) {
+    return MIN_NUMBER;
+  }
+
+  if (typeof num === "number") {
+    num = String(num);
+  }
+
+  if (num.includes(EXP_SYMBOL)) {
+    let precisionNum = Number(num.split(EXP_SYMBOL)[1]);
+    // toPrecision number has a limit b/w 0 to 100
+    if (precisionNum < MIN_LIMIT) {
+      return MIN_NUMBER;
+    }
+    if (precisionNum > MAX_LIMIT) {
+      num = num.replace(String(precisionNum), String(MAX_LIMIT));
+      precisionNum = MAX_LIMIT;
+    }
+    precisionNum = 1 + precisionNum;
+    return Number(num).toPrecision(precisionNum);
+  } else {
+    return num;
+  }
+};
+
+export const splitDecimals = (value: string) => {
+  if (value.includes("M") || value.includes("B")) {
+    const wordRemovedValue = value.includes("M")
+      ? value.replace("M", "")
+      : value.replace("B", "");
+    const splitValue = wordRemovedValue.split(".");
+    const appendWord = value.includes("M") ? "M" : "B";
+    const finalValue = [...splitValue, appendWord];
+    return finalValue;
+  } else {
+    return value.split(".");
+  }
+};

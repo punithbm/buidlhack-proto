@@ -2,6 +2,8 @@
 import useSWR from "swr";
 
 import { fetchTokensList } from "..";
+import { sum } from "lodash";
+import { tokenListTotalUSD } from "@/utils";
 const fetchTokensListHelper = ({
   address,
   params,
@@ -24,7 +26,11 @@ const useTokensList = (address: string, params: any) => {
     shouldRetryOnError: false,
     revalidateOnFocus: false,
   });
-  return { tokensList, tokensListLoader, error };
+  const tokenTotalUSD =
+    tokensList && tokensList?.length > 0
+      ? sum([tokenListTotalUSD(tokensList)])
+      : sum([tokenListTotalUSD(tokensList ?? [])]);
+  return { tokensList, tokensListLoader, error, tokenTotalUSD };
 };
 
 export { useTokensList };

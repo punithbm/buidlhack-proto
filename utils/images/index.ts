@@ -11,6 +11,7 @@ import buyIcon from "../../public/assets/images/buy.svg";
 import banner from "../../public/assets/images/banner.png";
 import placeholderNFT from "../../public/assets/images/placeholder_nft.png";
 import sent from "../../public/assets/images/sent.svg";
+import noState from "../../public/assets/images/no_state.svg";
 
 export type TImages =
   | "chevronLeftWhite"
@@ -25,6 +26,7 @@ export type TImages =
   | "banner"
   | "placeholderNFT"
   | "sent"
+  | "noState"
   | "walletIcon";
 
 export type TNextImage = {
@@ -47,4 +49,5 @@ export const icons: Record<TImages, TNextImage> = {
   banner,
   placeholderNFT,
   sent,
+  noState,
 };
