@@ -16,7 +16,6 @@ const NFTImage: FC<INFTImageProps> = ({
   imageFlag,
 }) => {
   const imageUrl = nftUrl || icons.placeholderNFT.src;
-  console.log(isVideo(imageUrl), "isVideo");
   return (
     <>
       {isVideo(imageUrl) ? (
