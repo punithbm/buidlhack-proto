@@ -8,6 +8,9 @@ import { serializeError } from "eth-rpc-errors";
 import Link from "next/link";
 import { InputField } from ".";
 import { useRouter } from "next/navigation";
+import { saveToLocalStorage } from "@/utils";
+import { ADDRESS_KEY } from "@/utils/api/constants";
+import { localStorageService } from "@/store/localStorage";
 
 const Header = () => {
   const { isConnecting, address, isConnected } = useAccount();
@@ -25,11 +28,12 @@ const Header = () => {
   };
 
   const handleWalletConnectFlow = () => {
+    saveToLocalStorage(ADDRESS_KEY, address);
     router.push("/proto");
   };
 
   useEffect(() => {
-    if (connecting) {
+    if (isConnected) {
       handleWalletConnectFlow();
     }
   }, [isConnecting]);
