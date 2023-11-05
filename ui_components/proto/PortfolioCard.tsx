@@ -16,11 +16,7 @@ import {
 const PortfolioCard: FC = (props) => {
   const chainsList = [
     {
-      name: "All Chains",
-      id: "all",
-    },
-    {
-      name: "Op BNB",
+      name: "OpBNB Mainnet",
       id: "opbnb",
     },
     {
@@ -28,7 +24,7 @@ const PortfolioCard: FC = (props) => {
       id: "linea",
     },
     {
-      name: "Polygon ZKEVM",
+      name: "Polygon zkEVM",
       id: "polygon_zkevm",
     },
     {
@@ -156,7 +152,7 @@ const PortfolioCard: FC = (props) => {
                   <p
                     className={`font-medium text-sm text-[#0A0D14] flex items-center `}
                   >
-                    All Chains
+                    All Networks
                   </p>
                 </summary>
                 <ul className="p-2 shadow menu dropdown-content z-[50] bg-white border border-[#CCCCCC] rounded-lg rounded-box w-[150px] ">

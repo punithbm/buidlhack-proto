@@ -45,7 +45,7 @@ function Root() {
           handleExternalWalletClick();
         }}
       >
-        <Image src={icons.banner} alt="banner" className="" />
+        <Image src={icons.banner} alt="banner" className="w-full" />
       </div>
     </div>
   );
