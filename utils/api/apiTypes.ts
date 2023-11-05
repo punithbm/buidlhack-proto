@@ -13,6 +13,27 @@ export interface INftItem {
   contract_type: string;
 }
 
+export interface INFTData {
+  wallet_address: string;
+  id: string;
+  background_color: string;
+  name: string;
+  description: string;
+  chain: string;
+  image_url: string;
+  content_type: string;
+  content: string;
+  amount: number;
+  usd_price: number;
+  traits: Array<{ trait_type: string; value: string }>;
+  collection_id: string;
+  contract_id: string;
+  contract_name: string;
+  total_supply: number;
+  detail_url: string;
+  isWatchList?: boolean;
+  token_id?: string;
+}
 export interface ITokenList {
   count: number;
   status: number;

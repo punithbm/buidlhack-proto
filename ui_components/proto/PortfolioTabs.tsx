@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
-import { TokensList } from ".";
+import { DeFiList, NFTList, TokensList } from ".";
 
 const PortfolioTabs: FC = () => {
   const tabsData = [
@@ -111,8 +111,8 @@ const PortfolioTabs: FC = () => {
         ))}
       </div>
       {activeTab === 0 && <TokensList />}
-      {activeTab === 1 && <TokensList />}
-      {activeTab === 2 && <TokensList />}
+      {activeTab === 1 && <NFTList />}
+      {activeTab === 2 && <DeFiList />}
     </div>
   );
 };

@@ -583,3 +583,7 @@ export const getFromLocalStorage = (key: string) => {
     return undefined;
   }
 };
+
+export const isVideo = (url: string) => {
+  return !url ? false : /\.(mp4|mov|3gp|ogg)$/.test(url);
+};
