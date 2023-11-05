@@ -25,7 +25,7 @@ function Root() {
       <PortfolioCard />
       <PortfolioTabs
         tokensList={tokensList}
-        tokensListLoader={true}
+        tokensListLoader={tokensListLoader}
         tokenTotalUSD={tokenTotalUSD}
       />
       <ActivitiesList />
