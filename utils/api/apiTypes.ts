@@ -85,6 +85,31 @@ export interface ITokenList {
   status: number;
   result: ITokenItem[];
 }
+export interface IActivityList {
+  count: number;
+  status: number;
+  result: IActivityListItem[];
+}
+
+export interface IActivityListItem {
+  chain_name: string;
+  chain_id: number;
+  hash: string;
+  block_number: number;
+  block_timestamp: number;
+  from_address: string;
+  to_address: string;
+  value: string;
+  fee: string;
+  method: string;
+  method_hash: string;
+  status: boolean;
+  transaction_tags: string;
+  deployed_contract: string;
+  gas_price: string;
+  gas_used: string;
+  block_base_fee_per_gas: string;
+}
 
 export interface ITokenItem {
   chain_name: string;

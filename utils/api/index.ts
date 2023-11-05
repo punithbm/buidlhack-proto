@@ -1,7 +1,13 @@
 import { TResponse } from "@/types";
 
 import { globalGetService, globalPostService } from "./globalApiServices";
-import { IDefiList, INftList, INftMetaItem, ITokenList } from "./apiTypes";
+import {
+  IDefiList,
+  INftList,
+  INftMetaItem,
+  ITokenList,
+  IActivityList,
+} from "./apiTypes";
 
 export const fetchTokensList = (
   address: string,
@@ -92,6 +98,30 @@ export const fetchDefiList = (
           ...response,
           data: response.data,
         };
+        resolve(_response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const fetchActivityList = (
+  address: string,
+  params: any
+): Promise<TResponse<IActivityList>> => {
+  return new Promise((resolve, reject) => {
+    globalGetService<any | null, IActivityList>(
+      `transactions/${address}`,
+      params || null,
+      "decommas"
+    )
+      .then((response) => {
+        const _response = {
+          ...response,
+          data: response.data,
+        };
+        console.log(response, "response");
         resolve(_response);
       })
       .catch((err) => {

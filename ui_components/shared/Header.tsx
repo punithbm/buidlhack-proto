@@ -47,7 +47,7 @@ const Header = () => {
   return (
     <div className="container mx-auto pt-8">
       <header
-        className={`h-[64px] w-full rounded-3xl left-0 bg-[#1C1C1F] dark:bg-secondaryDark-50 top-0 z-[99] lg:flex items-center hidden`}
+        className={`h-[64px] fixed w-full top-6 rounded-3xl left-1/2 -translate-x-1/2 bg-[#1C1C1F] z-[99] lg:flex items-center hidden max-w-[inherit]`}
       >
         <nav className="flex items-center justify-between w-full px-4 gap-x-6">
           <Link href={"/"} className="flex items-center gap-2">

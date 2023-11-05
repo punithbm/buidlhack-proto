@@ -38,7 +38,7 @@ function Root() {
     }
   };
   return (
-    <div className="h-full pt-7">
+    <div className="h-full pt-20">
       <div
         className="cursor-pointer"
         onClick={() => {

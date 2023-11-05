@@ -639,3 +639,41 @@ export const splitDecimals = (value: string) => {
     return value.split(".");
   }
 };
+
+export const getTransactionTypeName = (type: string) => {
+  let t = type?.toLowerCase();
+  switch (t) {
+    case "contract_execution":
+      return "Smart contract";
+    case "send":
+      return "Sent";
+    case "receive":
+      return "Received";
+    case "approve":
+      return "Approved";
+    case "remove_liquidity":
+      return "Remove liquidity";
+    case "add_liquidity":
+      return "Add liquidity";
+    case "swap":
+      return "Swap";
+    case "swapExactTokensForTokens":
+      return "Swap";
+    case "multicall":
+      return "Multicall";
+    default:
+      return "Transfer";
+  }
+};
+export const capitalizeFirstLetter = (str: string) => {
+  return str?.charAt(0)?.toUpperCase() + str?.slice(1);
+};
+export const getFromTo = (method: string) => {
+  if (method === "receive") {
+    return "From";
+  } else if (method === "send") {
+    return "Sent";
+  } else {
+    return "To";
+  }
+};

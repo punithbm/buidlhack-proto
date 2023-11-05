@@ -12,6 +12,8 @@ import banner from "../../public/assets/images/banner.png";
 import placeholderNFT from "../../public/assets/images/placeholder_nft.png";
 import sent from "../../public/assets/images/sent.svg";
 import noState from "../../public/assets/images/no_state.svg";
+import greenCheck from "../../public/assets/images/green_check.svg";
+import redCross from "../../public/assets/images/red_cross.svg";
 
 export type TImages =
   | "chevronLeftWhite"
@@ -27,6 +29,8 @@ export type TImages =
   | "placeholderNFT"
   | "sent"
   | "noState"
+  | "greenCheck"
+  | "redCross"
   | "walletIcon";
 
 export type TNextImage = {
@@ -50,4 +54,6 @@ export const icons: Record<TImages, TNextImage> = {
   placeholderNFT,
   sent,
   noState,
+  greenCheck,
+  redCross,
 };
