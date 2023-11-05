@@ -4,19 +4,19 @@ import { icons } from "@/utils/images";
 import { FC } from "react";
 
 export interface INFTImageProps {
-  nftData: INFTData;
+  nftUrl: string;
   imageClassName?: string;
   videoClassName?: string;
   imageFlag?: boolean;
 }
 
 const NFTImage: FC<INFTImageProps> = ({
-  nftData,
+  nftUrl,
   videoClassName,
   imageFlag,
 }) => {
-  const imageUrl =
-    nftData?.content || nftData?.image_url || icons.placeholderNFT.src;
+  const imageUrl = nftUrl || icons.placeholderNFT.src;
+  console.log(isVideo(imageUrl), "isVideo");
   return (
     <>
       {isVideo(imageUrl) ? (
@@ -28,16 +28,16 @@ const NFTImage: FC<INFTImageProps> = ({
         >
           <source src={imageUrl} type="video/mp4"></source>
         </video>
-      ) : imageFlag ? (
+      ) : (
         <img
           src={imageUrl}
-          alt={nftData?.name}
+          alt={"nft"}
           onError={(e) => {
             e.currentTarget.onerror = null;
             e.currentTarget.src = `${icons.placeholderNFT.src}`;
           }}
         />
-      ) : null}
+      )}
     </>
   );
 };

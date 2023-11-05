@@ -12,6 +12,22 @@ export interface INftItem {
   amount: string;
   contract_type: string;
 }
+
+export interface INftMetaItem {
+  status: number;
+  result: {
+    chain_name: string;
+    chain_id: number;
+    contract_address: string;
+    token_id: string;
+    name: string;
+    image_url: string;
+    animation_url: string | null;
+    contract_type: string;
+    collection_name: string;
+    collection_verified: boolean;
+  };
+}
 export interface IActivityActionDict {
   name: string;
   decimals: number;

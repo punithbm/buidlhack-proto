@@ -1,8 +1,16 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { DeFiList, NFTList, TokensList } from ".";
-import { getCurrencyFormattedString, splitDecimals } from "@/utils";
+import {
+  getCurrencyFormattedString,
+  splitDecimals,
+  getFromLocalStorage,
+} from "@/utils";
+import { useDefiList } from "@/utils/api/apiHooks/useDefiList";
+import { ADDRESS_KEY } from "@/utils/api/constants";
+import { IDefiItem, IDefiList } from "@/utils/api/apiTypes";
+import { useNftList } from "@/utils/api/apiHooks/useNftList";
 
 export interface IPortfolioTabsProps {
   tokensList: any;
@@ -65,6 +73,39 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
     },
   ];
 
+  const [defiLists, setDefiList] = useState<IDefiItem[]>();
+  const [nftsList, setNftsList] = useState<any>();
+
+  const address = getFromLocalStorage(ADDRESS_KEY);
+
+  const { defiList, defiListLoader } = useDefiList(address, {
+    networks: "linea,opbnb,optimism,arbitrum,polygon_zkevm",
+    limit: 100,
+    "api-key": process.env.NEXT_PUBLIC_DECOMMAS_API_ACCESS_KEY,
+  });
+
+  const { nftList, nftListLoader } = useNftList(address, {
+    networks: "linea,opbnb,optimism,arbitrum,polygon_zkevm",
+    limit: 100,
+    "api-key": process.env.NEXT_PUBLIC_DECOMMAS_API_ACCESS_KEY,
+  });
+
+  console.log(nftList, "nft list fromhooks");
+
+  useEffect(() => {
+    if (!defiListLoader) {
+      setDefiList(defiList);
+      console.log(defiList, "defilist");
+    }
+  }, [defiListLoader]);
+
+  useEffect(() => {
+    if (!nftListLoader) {
+      setNftsList(nftList);
+      console.log(nftList, "nftList");
+    }
+  }, [nftListLoader]);
+
   const handleSwitchTab = (id: number) => {
     setActiveTab(id);
   };
@@ -119,8 +160,8 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
       {activeTab === 0 && (
         <TokensList tokensList={tokensList} loader={tokensListLoader} />
       )}
-      {activeTab === 1 && <NFTList />}
-      {activeTab === 2 && <DeFiList />}
+      {activeTab === 1 && <NFTList nftList={nftsList} />}
+      {activeTab === 2 && <DeFiList defiList={defiLists ?? []} />}
     </div>
   );
 };

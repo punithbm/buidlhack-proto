@@ -8,24 +8,15 @@ import { serializeError } from "eth-rpc-errors";
 import Link from "next/link";
 import { InputField } from ".";
 import { useRouter } from "next/navigation";
-import { saveToLocalStorage } from "@/utils";
+import { saveToLocalStorage, trimAddress } from "@/utils";
 import { ADDRESS_KEY } from "@/utils/api/constants";
 import { localStorageService } from "@/store/localStorage";
 
 const Header = () => {
   const { isConnecting, address, isConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
   const router = useRouter();
-  const [connecting, setConnecting] = useState(false);
-  const [showQR, setShowQr] = useState(false);
-  const [showDeposit, setShowDeposit] = useState(false);
-  const [showOptions, setShowOptions] = useState(true);
-
-  const handlePublicKeyClick = () => {
-    setShowOptions(false);
-    setShowDeposit(false);
-    setShowQr(true);
-  };
 
   const handleWalletConnectFlow = () => {
     saveToLocalStorage(ADDRESS_KEY, address);
@@ -35,19 +26,20 @@ const Header = () => {
   useEffect(() => {
     if (isConnected) {
       handleWalletConnectFlow();
+    } else {
+      router.push("/");
     }
-  }, [isConnecting]);
+    console.log(isConnected, "isConnected");
+  }, [isConnected]);
 
   const handleExternalWalletClick = async () => {
     try {
       if (!isConnected) {
-        setConnecting(true);
         await openConnectModal?.();
       } else {
         handleWalletConnectFlow();
       }
     } catch (e: any) {
-      setConnecting(false);
       const err = serializeError(e);
       console.log(err.message, "error");
     }
@@ -71,12 +63,14 @@ const Header = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={() => {
-                handleExternalWalletClick();
+                isConnected
+                  ? openAccountModal?.()
+                  : handleExternalWalletClick();
               }}
               className="bg-[#44484F] p-2 text-base font-medium rounded-lg text-white flex items-center gap-2"
             >
               <Image src={icons.walletIcon} alt="wallet" />
-              Connect
+              {isConnected ? trimAddress(address ?? "", 4) : "Connect"}
             </button>
 
             <Image src={icons.settings} alt="setting" />

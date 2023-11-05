@@ -1,7 +1,7 @@
 import { TResponse } from "@/types";
 
 import { globalGetService, globalPostService } from "./globalApiServices";
-import { IDefiList, INftList, ITokenList } from "./apiTypes";
+import { IDefiList, INftList, INftMetaItem, ITokenList } from "./apiTypes";
 
 export const fetchTokensList = (
   address: string,
@@ -38,6 +38,33 @@ export const fetchNftsList = (
       "decommas"
     )
       .then((response) => {
+        const _response = {
+          ...response,
+          data: response.data,
+        };
+        resolve(_response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const fetchNftsItem = (
+  address: string,
+  chain: string,
+  token_id: string,
+  params?: any
+): Promise<TResponse<INftMetaItem>> => {
+  return new Promise((resolve, reject) => {
+    console.log("method called");
+    globalGetService<any | null, INftMetaItem>(
+      `nft_metadata/${chain}/${address}/${token_id}`,
+      params || null,
+      "decommas"
+    )
+      .then((response) => {
+        console.log(response, "item response");
         const _response = {
           ...response,
           data: response.data,
