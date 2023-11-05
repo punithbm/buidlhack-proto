@@ -17,6 +17,19 @@ export interface ITokensListProps {
 const TokensList: FC<ITokensListProps> = (props: any) => {
   const { tokensList, loader } = props;
 
+  const getTokenUsdValue = (tokenData: any) => {
+    return (
+      (tokenData.amount / Math.pow(10, tokenData.decimals)) *
+      tokenData.actual_price
+    ).toFixed(2);
+  };
+
+  const getTokenFormattedValue = (tokenData: any) => {
+    return `${(tokenData.amount / Math.pow(10, tokenData.decimals)).toFixed(
+      2
+    )} ${tokenData.symbol}`;
+  };
+
   return (
     <>
       {loader ? (
@@ -70,16 +83,11 @@ const TokensList: FC<ITokensListProps> = (props: any) => {
                 </div>
                 <div className="pb-3">
                   <p className="paragraph_bold flex items-center gap-1">
-                    {formatTokenAmount(_list?.amount)}
+                    {`$ ${getTokenUsdValue(_list)}`}
                   </p>
                   <div className="flex gap-4 justify-between items-center">
                     <p className="paragraph leading-4 text-text-300 dark:text-textDark-300 pt-[2px] mb-2">
-                      {getCurrencyFormattedString(
-                        tokenValueCalculation(
-                          _list?.actual_price,
-                          _list?.amount
-                        )
-                      )}
+                      {getTokenFormattedValue(_list)}
                     </p>
                   </div>
                 </div>

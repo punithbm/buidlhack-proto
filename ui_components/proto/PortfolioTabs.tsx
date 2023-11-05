@@ -6,9 +6,15 @@ import {
   getCurrencyFormattedString,
   splitDecimals,
   getFromLocalStorage,
+  saveToLocalStorage,
 } from "@/utils";
 import { useDefiList } from "@/utils/api/apiHooks/useDefiList";
-import { ADDRESS_KEY } from "@/utils/api/constants";
+import {
+  ADDRESS_KEY,
+  DEFI_NETWORTH_KEY,
+  NFT_NETWORTH_KEY,
+  TOKEN_NETWORTH_KEY,
+} from "@/utils/api/constants";
 import { IDefiItem, IDefiList, INftItem } from "@/utils/api/apiTypes";
 import { useNftList } from "@/utils/api/apiHooks/useNftList";
 
@@ -23,15 +29,43 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
   tokenTotalUSD,
 }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
-  const tokenValueFormat = getCurrencyFormattedString(tokenTotalUSD);
+  const tokenValueFormat = getCurrencyFormattedString(
+    tokenTotalUSD / Math.pow(10, 18)
+  );
   const tokenSplitNetWorth = splitDecimals(tokenValueFormat);
+  useEffect(() => {
+    if (tokensList) {
+      getTokenNetworth();
+    }
+  }, [tokensList]);
+  const [tokensNetworth, setTokensNetworth] = useState(0);
+
+  const getTokenNetworth = () => {
+    const usdValueList: number[] = [];
+    tokensList.forEach((item: any, ind: number) => {
+      const tokenUsdValue =
+        (item.amount / Math.pow(10, item.decimals)) * item.actual_price;
+      usdValueList.push(tokenUsdValue);
+    });
+    const networth =
+      usdValueList &&
+      usdValueList.reduce(
+        (accumulator, currentValue) =>
+          Number(accumulator) + Number(currentValue),
+        0
+      );
+    saveToLocalStorage(TOKEN_NETWORTH_KEY, networth);
+    window.dispatchEvent(new Event(TOKEN_NETWORTH_KEY));
+    setTokensNetworth(networth);
+  };
+
   const [nftNetworth, setNftNetworth] = useState(0);
   const [defiNetworth, setDefiNetworth] = useState(0);
   const tabsData = [
     {
       id: 0,
       title: "Tokens",
-      netWorth: tokenSplitNetWorth,
+      netWorth: `$ ${tokensNetworth.toFixed(2)}`,
       icons: tokensList?.slice(0, 4).map((item: any) => ({
         icon: item.logo_url,
         name: item.name,
@@ -104,6 +138,8 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
             Number(accumulator) + Number(currentValue),
           0
         );
+      saveToLocalStorage(DEFI_NETWORTH_KEY, networth);
+      window.dispatchEvent(new Event(DEFI_NETWORTH_KEY));
       setDefiNetworth(networth?.toFixed(4) as unknown as number);
       setDefiList(defiList);
     }
@@ -121,6 +157,8 @@ const PortfolioTabs: FC<IPortfolioTabsProps> = ({
             Number(accumulator) + Number(currentValue),
           0
         );
+      saveToLocalStorage(NFT_NETWORTH_KEY, networth);
+      window.dispatchEvent(new Event(NFT_NETWORTH_KEY));
       setNftNetworth(networth as unknown as number);
       setNftsList(nftList);
     }
