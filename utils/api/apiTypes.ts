@@ -12,6 +12,36 @@ export interface INftItem {
   amount: string;
   contract_type: string;
 }
+export interface IActivityActionDict {
+  name: string;
+  decimals: number;
+  value: number;
+  quote_rate: number;
+  logo_url: string;
+  from_addr: string;
+  from: string;
+  to: string;
+  symbol: string;
+  amount: number;
+  to_addr: string;
+  token_id: string;
+  tx_value: number;
+}
+export interface IActivityListFormatted {
+  id: string;
+  from: string;
+  to: string;
+  date: number;
+  status: number;
+  type: string;
+  value: number;
+  fee: number;
+  chain: string;
+  native_token_decimals: number;
+  description: string;
+  sent: IActivityActionDict[];
+  received: IActivityActionDict[];
+}
 
 export interface INFTData {
   wallet_address: string;
