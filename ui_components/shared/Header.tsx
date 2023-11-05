@@ -8,15 +8,52 @@ import { serializeError } from "eth-rpc-errors";
 import Link from "next/link";
 import { InputField } from ".";
 import { useRouter } from "next/navigation";
+import { useTokensList } from "@/utils/api/apiHooks/useTokensList";
+import { useDefiList } from "@/utils/api/apiHooks/useDefiList";
+import { saveToLocalStorage } from "@/utils";
 
 const Header = () => {
   const { isConnecting, address, isConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
   const router = useRouter();
+  const { openAccountModal } = useAccountModal();
   const [connecting, setConnecting] = useState(false);
   const [showQR, setShowQr] = useState(false);
   const [showDeposit, setShowDeposit] = useState(false);
   const [showOptions, setShowOptions] = useState(true);
+
+  const { tokensList, tokensListLoader } = useTokensList(
+    "0x06e70f295B6337c213DDe82D13cc198027687A7B",
+    {
+      networks:
+        "optimism,opbnb,linea,arbitrum_nova,polygon_zkevm,arbitrum,polygon",
+      limit: 100,
+      verified: true,
+      "api-key": process.env.NEXT_PUBLIC_DECOMMAS_API_ACCESS_KEY,
+    }
+  );
+
+  const { defiList, defiListLoader } = useDefiList(
+    "0x06e70f295B6337c213DDe82D13cc198027687A7B",
+    {
+      networks:
+        "optimism,opbnb,linea,arbitrum_nova,polygon_zkevm,arbitrum,polygon",
+      limit: 100,
+      "api-key": process.env.NEXT_PUBLIC_DECOMMAS_API_ACCESS_KEY,
+    }
+  );
+
+  useEffect(() => {
+    if (!tokensListLoader) {
+      console.log(tokensList, "tokens list");
+    }
+  }, [tokensListLoader]);
+
+  useEffect(() => {
+    if (!defiListLoader) {
+      console.log(defiList, "defi list");
+    }
+  }, [defiListLoader]);
 
   const handlePublicKeyClick = () => {
     setShowOptions(false);
@@ -30,7 +67,10 @@ const Header = () => {
 
   useEffect(() => {
     if (connecting) {
-      handleWalletConnectFlow();
+      if (isConnected) {
+        saveToLocalStorage("address", address);
+        handleWalletConnectFlow();
+      }
     }
   }, [isConnecting]);
 
@@ -53,32 +93,24 @@ const Header = () => {
       <header
         className={`h-[64px] w-full rounded-3xl left-0 bg-[#1C1C1F] dark:bg-secondaryDark-50 top-0 z-[99] lg:flex items-center hidden`}
       >
-        <nav className="flex items-center justify-between w-full px-4 gap-x-6">
-          <Link href={"/"} className="flex items-center gap-2">
-            <Image width={42} src={icons.logo} alt="logo" />
-            <p className="text-white font-bold text-base">Proto</p>
-          </Link>
-          <InputField
-            type={"text"}
-            id={"search"}
-            placeholder="Search for NFTs"
-            className="w-2/5"
-          />
-          <div className="flex items-center gap-6">
-            <button
-              onClick={() => {
-                handleExternalWalletClick();
-              }}
-              className="bg-[#44484F] p-2 text-base font-medium rounded-lg text-white flex items-center gap-2"
-            >
-              <Image src={icons.walletIcon} alt="wallet" />
-              Connect
-            </button>
-
-            <Image src={icons.settings} alt="setting" />
-
-            <Image src={icons.help} alt="setting" />
-          </div>
+        <nav className="flex items-center justify-between w-full px-8 gap-x-6">
+          <Image src={icons.logo} alt="logo" />
+          <button
+            onClick={() => {
+              handleExternalWalletClick();
+            }}
+            className="border border-white p-2 rounded-[8px] text-white"
+          >
+            Connect Wallet
+          </button>
+          <button
+            onClick={() => {
+              openAccountModal?.();
+            }}
+            className="border border-white p-2 rounded-[8px] text-white"
+          >
+            Switch Wallet
+          </button>
         </nav>
       </header>
     </div>

@@ -564,3 +564,22 @@ export const formatTokenAmount = (_amount: number | string | undefined) => {
   }
   return Number(_amount.toFixed(DEFAULT_TOKEN_DECIMALS));
 };
+// // Function to save a list of objects to localStorage
+export const saveToLocalStorage = (key: string, list: any) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(list));
+  } catch (error) {
+    console.error("Error saving to localStorage:", error);
+  }
+};
+
+// // Function to retrieve a list of objects from localStorage
+export const getFromLocalStorage = (key: string) => {
+  try {
+    const storedList = localStorage.getItem(key);
+    return storedList ? JSON.parse(storedList) : undefined;
+  } catch (error) {
+    console.error("Error retrieving from localStorage:", error);
+    return undefined;
+  }
+};
