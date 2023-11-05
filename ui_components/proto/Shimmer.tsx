@@ -66,19 +66,18 @@ const Shimmer: FC<TShimmerTypes> = (props) => {
                     <div className="flex flex-col">
                       <div className="h-4 w-20 mb-2 rounded bg-secondary-900/10 dark:bg-secondaryDark-200" />
                       <div className="flex items-center">
-                        <div className="h-6 w-6 md:h-9 md:w-9 rounded-full bg-secondary-900/10 dark:bg-secondaryDark-200" />
-                        <div className="h-4 w-20 mb-2 rounded bg-secondary-900/10 dark:bg-secondaryDark-200" />
+                        <div className="h-6 w-6 rounded-full bg-secondary-900/10 dark:bg-secondaryDark-200" />
                       </div>
                     </div>
                   </div>
                   <div className="pb-3">
-                    <div className="h-4 w-20 mb-2 rounded bg-secondary-900/10 dark:bg-secondaryDark-200" />
+                    <div className="h-4 w-40 mb-2 rounded bg-secondary-900/10 dark:bg-secondaryDark-200" />
                     <div className="flex gap-4 justify-between items-center">
                       <div className="h-4 w-20 mb-2 rounded bg-secondary-900/10 dark:bg-secondaryDark-200" />
                     </div>
                   </div>
-                  <div className="absolute bottom-0 left-0 w-full bg-secondary-100 dark:bg-secondaryDark-100">
-                    <div className="h-4 w-20 mb-2 rounded bg-secondary-900/10 dark:bg-secondaryDark-200" />
+                  <div className="absolute bottom-0 left-0 w-full bg-secondary-100 dark:bg-secondaryDark-100 py-2">
+                    <div className="h-2 w-20 ml-4 rounded bg-secondary-900/10 dark:bg-secondaryDark-200" />
                   </div>
                 </div>
               );
