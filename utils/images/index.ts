@@ -8,6 +8,7 @@ import help from "../../public/assets/images/help.svg";
 import search from "../../public/assets/images/search.svg";
 import receiveIcon from "../../public/assets/images/receive.svg";
 import buyIcon from "../../public/assets/images/buy.svg";
+import banner from "../../public/assets/images/banner.png";
 
 export type TImages =
   | "chevronLeftWhite"
@@ -19,6 +20,7 @@ export type TImages =
   | "search"
   | "receiveIcon"
   | "buyIcon"
+  | "banner"
   | "walletIcon";
 
 export type TNextImage = {
@@ -38,4 +40,5 @@ export const icons: Record<TImages, TNextImage> = {
   search,
   receiveIcon,
   buyIcon,
+  banner,
 };
