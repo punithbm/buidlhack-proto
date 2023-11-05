@@ -1,13 +1,18 @@
 "use client";
 import { icons } from "@/utils/images";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import Actions from "../shared/Actions";
 
 import { AvatarGroup } from "../shared";
 import { portfolioActionData } from "@/constants";
-import { saveToLocalStorage } from "@/utils";
-import { SELECTED_CHAIN_KEY } from "@/utils/api/constants";
+import { getFromLocalStorage, saveToLocalStorage } from "@/utils";
+import {
+  DEFI_NETWORTH_KEY,
+  NFT_NETWORTH_KEY,
+  SELECTED_CHAIN_KEY,
+  TOKEN_NETWORTH_KEY,
+} from "@/utils/api/constants";
 
 const PortfolioCard: FC = (props) => {
   const chainsList = [
@@ -52,6 +57,50 @@ const PortfolioCard: FC = (props) => {
     // }
   };
 
+  const [tokensNetworth, setTokensNetworth] = useState(0);
+  const [nftNetworth, setNftNetworth] = useState(0);
+  const [defiNetworth, setDefiNetworth] = useState(0);
+  const [totalNetworth, setTotalNetworth] = useState(0);
+
+  if (typeof window !== "undefined") {
+    window.addEventListener(NFT_NETWORTH_KEY, () => {
+      const nftNW = Number(
+        getFromLocalStorage(NFT_NETWORTH_KEY).toFixed(2)
+      ) as unknown as number;
+      setNftNetworth(nftNW);
+    });
+  }
+
+  if (typeof window !== "undefined") {
+    window.addEventListener(DEFI_NETWORTH_KEY, () => {
+      const defiNW = Number(getFromLocalStorage(DEFI_NETWORTH_KEY)).toFixed(
+        2
+      ) as unknown as number;
+      setDefiNetworth(defiNW);
+    });
+  }
+
+  if (typeof window !== "undefined") {
+    window.addEventListener(TOKEN_NETWORTH_KEY, () => {
+      const tokenNW = Number(
+        getFromLocalStorage(TOKEN_NETWORTH_KEY).toFixed(2)
+      ) as unknown as number;
+      setTokensNetworth(tokenNW);
+    });
+  }
+
+  const getTotalNetworth = () => {
+    const totalNW =
+      Number(tokensNetworth) + Number(defiNetworth) + Number(nftNetworth);
+    setTotalNetworth(totalNW);
+  };
+
+  useEffect(() => {
+    if (nftNetworth && defiNetworth && tokensNetworth) {
+      getTotalNetworth();
+    }
+  }, [nftNetworth, defiNetworth, tokensNetworth]);
+
   return (
     <div className="relative bg-[#1C1C1F] rounded-3xl p-5 mt-8 mb-6">
       <div className="md:flex md:justify-center mb-7">
@@ -61,36 +110,34 @@ const PortfolioCard: FC = (props) => {
           </div>
           <p className="text-base text-[#474E66] font-normal">Networth</p>
           <p className="text-[32px] font-black text-[#0A0D14] mb-5">
-            $255.<span className="font-semibold opacity-50">20</span>
+            {`$ ${totalNetworth}`}
           </p>
           <ul>
             <li className="flex items-center justify-between mb-4 last:mb-0">
-              <p className="text-[#464E59] text-sm font-normal">
-                Total Investment
-              </p>
+              <p className="text-[#464E59] text-sm font-normal">Tokens</p>
 
               <p
                 className={`font-medium text-sm text-[#0A0D14] flex items-center `}
               >
-                $1,782.08
+                {`$ ${tokensNetworth}`}
               </p>
             </li>
             <li className="flex items-center justify-between mb-4 last:mb-0">
-              <p className="text-[#464E59] text-sm font-normal">Rewards</p>
+              <p className="text-[#464E59] text-sm font-normal">NFTs</p>
 
               <p
                 className={`font-medium text-sm text-[#0A0D14] flex items-center `}
               >
-                $1,782.08
+                {`$ ${nftNetworth}`}
               </p>
             </li>
             <li className="flex items-center justify-between mb-4 last:mb-0">
-              <p className="text-[#464E59] text-sm font-normal">P&L</p>
+              <p className="text-[#464E59] text-sm font-normal">DEFI</p>
 
               <p
                 className={`font-medium text-sm text-[#0A0D14] flex items-center `}
               >
-                $1,782.08
+                {`$ ${defiNetworth}`}
               </p>
             </li>
           </ul>
