@@ -3,11 +3,16 @@ import { FC } from "react";
 import { getCurrencyFormattedString, truncateText } from "@/utils";
 import { NFTImage } from ".";
 
-const NFTList: FC = (props: any) => {
+export interface INftListProps {
+  nftList: any;
+}
+
+const NFTList: FC<INftListProps> = (props) => {
   const { nftList } = props;
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 gap-5 mx-5 mb-5">
       {nftList?.slice(0, 10).map((item: any, key: number) => {
+        console.log(item, "nft image item");
         return (
           <div
             key={key}
@@ -15,7 +20,7 @@ const NFTList: FC = (props: any) => {
           >
             <div className="relative overflow-hidden aspect-square w-full h-full md:w-auto md:h-auto">
               <NFTImage
-                nftData={item}
+                nftUrl={item.imageUrl}
                 videoClassName=" h-full"
                 imageClassName=" h-full object-cover"
               />
@@ -34,7 +39,7 @@ const NFTList: FC = (props: any) => {
                 Floor price
               </p>
               <p className="paragraph_bold text-[12px] leading-[18px]">
-                {getCurrencyFormattedString(item?.usd_price)}
+                {getCurrencyFormattedString(item?.floorPrice)}
               </p>
             </div>
           </div>
